@@ -27,3 +27,8 @@ show collections;
 what are documents?
 they are Field-value pairs
 they are stored in JSON-like BSON
+
+
+say we want to add more files to our database
+first launch mongo
+make sure we are in the database we want to use
