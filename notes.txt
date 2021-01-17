@@ -1,0 +1,29 @@
+inside MongoDB\server\4.4\bin
+run mongo
+this will start up our database as a service 
+
+//show databases
+show dbs
+
+//to exit 
+run exit
+
+
+
+
+//to import files 
+mongoimport.exe --db cooker examples.json 
+//cooker is the name we are making up, examples is the file we are useing 
+
+
+//use the database
+use nameOfDatabase
+
+//show collection
+show collections;
+
+
+
+what are documents?
+they are Field-value pairs
+they are stored in JSON-like BSON
