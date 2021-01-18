@@ -28,7 +28,66 @@ what are documents?
 they are Field-value pairs
 they are stored in JSON-like BSON
 
+create a doc variable
+doc = {"title": "Tacos", "desc": "Yummie tacos", "cook_time": 20};
 
-say we want to add more files to our database
-first launch mongo
-make sure we are in the database we want to use
+run db.tacos.insertOne(doc)
+
+/*
+> db.tacos.insertOne(doc)
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6003e87fc3ff9b5cfeeca23a")
+}
+*/
+
+
+lets see what our document looks like 
+
+db.tacos.find()
+/*
+{ "_id" : ObjectId("6003e87fc3ff9b5cfeeca23a"), "title" : "Tacos", "desc" : "Yummie tacos", "cook_time" : 20 }
+*/
+
+use db.tacos.find().pretty() for a formated output :D
+
+
+
+////
+find
+////
+.find()
+.find({"key": "value"}) ex: {"title":"Tacos"}
+you can add multiple conditional. ex {"title":"Tacos", "cook_time": 20}
+notice they are both in the same {}
+
+you can give multiple parameters though .find({},{})
+
+bd.recopes.find({"title":"Tacos"}, {"title": 1}).pretty(); //here 1 = true, 0 = false
+you can use this trick to include or exclude things from your query 
+
+lets say you just want back documents with just their titles...
+
+bd.recopes.find({}, {"title": 1}).pretty(); //you send that empty query with the title
+
+what about partial title? you arent always going to know the full title
+regular expressions are used
+
+bd.recopes.find({"title": {$regex: /taco/i}}, {"title": 1}) //i is for case insenitive, these are javascrip regular expression comands
+
+
+
+collections
+
+ db.getName() //tells you the database you are in 
+ show dbs //shows you the databases
+ show collections // shows you the collections in the database you are in 
+
+to create a collection inside a database
+db.name_of_collection_you_want_to_create.insertOne({})
+
+show collections and you will see it 
+
+to create subcollection 
+db.name_of_collection_you_want_to_create.name_of_sub_collection.insertOne({})
+this really store the same way but can be helpfull for query puropses 
