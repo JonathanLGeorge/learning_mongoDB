@@ -91,3 +91,95 @@ show collections and you will see it
 to create subcollection 
 db.name_of_collection_you_want_to_create.name_of_sub_collection.insertOne({})
 this really store the same way but can be helpfull for query puropses 
+
+
+
+.limit()
+limits the number of results returned
+
+.count()
+returns the number of results in collection 
+
+.sort({"key or field you wantt o sort by": value which is the direction 1,-1})
+1 assending -1 decending 
+this is sorting the value in order not the key
+
+.skip(6)
+you skip the key value pair in the collection by x
+
+
+operators and arrays
+$gt = >  
+$lt = <
+$lte = <=
+$or = or || 
+simply using a "," in the collection query works like "&& and"
+
+lets say you want to find info in a collection thats inside an arrays
+use $all
+db.recipes.find({tags: {$all: ["easy", "quick"]}}, {"title": 1, "tags": 1});
+
+this will only return collections that have both easy and quick though
+to get easy or quick we use $in
+
+db.recipes.find({tags: {$ain: ["easy", "quick"]}}, {"title": 1, "tags": 1});
+
+if we want to reach inside an array of objects then we need to use dot notation
+
+db.recipes.find({"ingredients.name": "egg"}, {"title":1});
+example output:
+{"_id": ObjectId("4fds456f4e5a64sdf56ew5f4a"), "title": "Pancakes"}
+{"_id": ObjectId("4fgfsf456f4ehhghghre16egf"), "title": "Omlete"}
+
+
+update and delete documents
+
+we might want to change in database schema user updates a pofile correvt spelling error ect...
+
+$set 
+
+example data 
+{"_id": ObjectId("4fds456f4e5a64sdf56ew5f4a"), "title": "Pancakes"}
+{"_id": ObjectId("4fgfsf456f4ehhghghre16egf"), "title": "Omlete"}
+
+we want to change pancakes to waffles
+we will updateOne and then use $set
+db.examples.updateOne({"title": "Pancakes"}, {$set: {"title": "Waffles"}})
+
+if you try to set a feild that didnt exist, then mongo will insert a new waffle in this case into the collection 
+
+$unset
+
+lets say we have a collection object with multiple feilds and we want to remove one of them 
+
+{"_id": ObjectId("4fds456f4e5a64sdf56ew5f4a"), "title": "Pancakes", "breakfast_only": false}
+
+use unset
+db.examples.updateOne({"title": "Pancakes"}, {$unset: {"breakfast_only": 1}}) //1 for true
+
+this will remove the "breakfast_only" field in the example
+
+$inc
+increment a field. super useful
+
+db.examples.updateOne({"title": "Tacos"},{$inc: {"likes_count": 1}} //-1 works too
+
+this will lead to whats called Eventual Consistancy 
+*Guarentee the field will always increase or decrese by the proper ammount
+*this is an Atomic operation, we arent checking the value just updating it 
+*there are no locks or transaction with a query... 
+
+
+updating and modifying arrays 
+
+$push
+$pull
+db.examples.updateOne({"title": "Tacos", {$push: {"likes_id":60}}} //added 60 id to likes_id
+db.examples.updateOne({"title": "Tacos", {$pull: {"likes_id":60}}} //removed 60 from likes_id
+
+how to delet documents
+deleteOne
+deletMany
+
+db.examples.deleteOne({"_id": ObjectId("4fds456f4e5a64sdf56ew5f4a")})
+

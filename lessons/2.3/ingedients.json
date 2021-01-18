@@ -1,23 +1,23 @@
 {
-    "title": "Apple Pie",
-    "directions": [
-      "Roll the pie crust",
-      "Make the filling",
-      "Bake"
-    ],
-    "ingredients": [
-       {
-         "amount": {
-           "quantity": 2,
-             "unit": null
-           },
-          "name": "pie crusts"
-      }, {
-         "amount": {
-           "quantity": 1,
-             "unit": "tbsp"
-          },
-          "name": "cinnamon"
-      }
-    ]
-  }
+  "title": "Apple Pie",
+  "directions": ["Roll the pie crust", "Make the filling", "Bake"],
+  "ingredients": [
+    {
+      "amount": {
+        "quantity": 2,
+        "unit": null
+      },
+      "name": "pie crusts"
+    },
+    {
+      "amount": {
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      "name": "cinnamon"
+    }
+  ]
+}
+
+//here we have an array of objects
+//we can think of this as its own document which we can use to edit in mongo
