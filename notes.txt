@@ -183,3 +183,43 @@ deletMany
 
 db.examples.deleteOne({"_id": ObjectId("4fds456f4e5a64sdf56ew5f4a")})
 
+
+
+
+
+////////////////////////////
+one to many example
+lets say we have a recipe but many comment on the recipe.
+we may not want to store those coments in the recipe document
+we can store the comments in a seperate collectio 
+we can have lets say a top comments in the recipe... and we grab the comments as they change.
+
+
+you should ask... will your data change...
+
+///////////
+basic indexes
+////////////
+lets look at // explain("executionStats");
+db.recipes.find({title: "Tacos"}, {"title"}).explain("executionStats");
+
+this will return all the querys that go on in the background... 
+
+if we create an index on recipes. we can dramatically shorten the run time it takes to query this info
+
+HOT TIP
+type db.nameofecollection and then TAB key twice... space bar to to scroll muiltiple pages..
+this will bring up a list of comands
+
+to know your indexes on a colection
+db.nameofcollection.getIndexes()
+
+the first lising is created by mongo 
+_id will be in a name feild
+
+how do we create an index?
+bd.nameofcollection.createIndex({"name_of_index": 1}) //1 = assending
+
+
+to remove an index 
+bd.collectionName.dropIndex("name_of_index_1")

@@ -1,0 +1,9 @@
+how gridFS works
+
+Breaks files into chunks
+↓
+chunks are stored in seperate documents
+↓
+a parent doc keeps track of file data
+↓
+the chunks are steamed back via a monogoDB client
